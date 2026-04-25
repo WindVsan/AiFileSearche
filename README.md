@@ -1,5 +1,7 @@
 <div align="center">
 
+![demo](/assets/icon.png)
+
 # 🔍 AI File Searcher
 
 ### 「ファイル名を忘れても見つかる」AI検索ツール
