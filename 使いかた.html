@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI File Searcher - 使いかたガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 95%;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            color: #e2e8f0;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #60a5fa;
+            margin-top: 2rem;
+        }
+
+        p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #fca5a5;
+        }
+
+        .step-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .img-placeholder {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px dashed var(--glass-border);
+            margin: 1rem 0;
+            color: #64748b;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-link:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI File Searcher</h1>
+            <p>インテリジェントなローカル検索を、あなたの手に。</p>
+        </header>
+
+        <main class="glass-panel">
+            <section>
+                <h2>👋 はじめに</h2>
+                <p>AI File Searcherは、Googleの最新AI「Gemini」を利用して、あなたのPC内にあるファイルを賢く探し出すツールです。従来の「名前の一部が一致する」だけの検索とは異なり、あなたのやりたいことやファイルの意図を汲み取って結果を提示します。</p>
+            </section>
+
+            <section>
+                <h2>🛠 導入手順（セットアップ）</h2>
+                <p>アプリを使い始める前に、以下の準備を行ってください。</p>
+                <ul>
+                    <li><span class="step-badge">1</span> <strong>APIキーの設定</strong>: プロジェクトフォルダにある <code>apis.json</code> を開き、<code>apiKey</code> の部分にご自身のGemini APIキーを入力して保存してください。</li>
+                    <li><span class="step-badge">2</span> <strong>起動</strong>: フォルダ内の <code>run.bat</code> をダブルクリックしてください。自動的にブラウザが立ち上がり、アプリ画面が表示されます。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>🚀 基本的な使い方</h2>
+                <ul>
+                    <li><span class="step-badge">1</span> <strong>対象のフォルダを選ぶ</strong>: 「参照」ボタンを押して、検索したいフォルダを選択してください。パスを直接入力することも可能です。</li>
+                    <li><span class="step-badge">2</span> <strong>クエリを入力する</strong>: 検索窓に、探したいファイルについて入力してください（例：「昨日作ったレポート」「Pythonのプロジェクト用設定」など）。</li>
+                    <li><span class="step-badge">3</span> <strong>AIが分析</strong>: 検索ボタン（🔍）を押すと、AIがフォルダ内をスキャンし、関連度の高い順に最大30件の結果を表示します。結果の右上には、かかった<strong>検索時間</strong>が表示されます。</li>
+                    <li><span class="step-badge">4</span> <strong>結果の確認とハイライト</strong>: 
+                        AIが判断した関連度が<strong>「★」マーク（最大5つ）</strong>で各ファイルの右側に表示されます。さらに、関連度が最も高い<strong>上位3件は、それぞれ金・銀・銅のグラデーション</strong>で強調表示されるため、一番求めるファイルが直感的に見つかります。
+                    </li>
+                    <li><span class="step-badge">5</span> <strong>ファイルを開く</strong>: 目的のファイルをクリックすると、Windowsの関連付けられたアプリで即座に開きます。</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>💡 Tips</strong>
+                    <ul>
+                        <li><strong>AI学習機能</strong>: よく開くファイルはAIが自動で学習し、次回の検索から優先的に上位に表示されるようになります。使えば使うほどあなた専用に最適化されます。</li>
+                        <li><strong>拡張子のみ検索</strong>: 検索キーワードを空欄のまま、拡張子だけを選択して検索ボタンを押すと、その形式のファイルを新しい順に一覧表示できます。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>🔍 高度な検索オプション</h2>
+                <h3>内容も精査する</h3>
+                <p>チェックボックスをオンにすると、テキストベースのファイル（.txt, .md, .jsなど）の内容の一部をAIが読み取り、より精度の高い検索を行います。中身は覚えているけれど名前を忘れてしまった時に最適です。</p>
+
+                <h3>拡張子フィルター</h3>
+                <p>特定の種類のファイルだけを探したい場合は、「拡張子フィルター」に <code>.jpg, .png</code> のようにカンマ区切りで入力してください。</p>
+
+                <h3>AIモデルの選択</h3>
+                <p>用途に合わせてAIモデルを切り替えられます。通常は高速な <code>gemini-1.5-flash</code> がおすすめですが、より複雑な推論が必要な場合は上位モデルを選択してください。</p>
+            </section>
+
+            <section>
+                <h2>⚙️ 設定（apis.json）</h2>
+                <p>本ツールを動作させるには、Google AI Studioで取得したAPIキーが必要です。プロジェクト直下の <code>apis.json</code> をメモ帳などで開き、<code>apiKey</code> の項目に貼り付けてください。</p>
+            </section>
+
+            <div style="text-align: center;">
+                <a href="public/index.html" class="btn-link">アプリを開く</a>
+            </div>
+        </main>
+
+        <footer>
+            &copy; 2026 AI File Searcher Project. Designed for premium productivity.
+        </footer>
+    </div>
+</body>
+</html>
