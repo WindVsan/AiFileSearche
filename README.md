@@ -4,7 +4,7 @@
 
 ### 「ファイル名を忘れても見つかる」AI検索ツール
 
-![demo](AIFileSearcher-/assets/1.png)
+![demo](/assets/1.png)
 
 > 「あのファイルどこだっけ？」をAIで一瞬解決
 
@@ -71,7 +71,7 @@ AI File Searcher：
 
 ## 🖥 UI
 
-![ui](AIFileSearcher-/assets/2.png)
+![ui](/assets/2.png)
 
 * 上位3件を金・銀・銅でハイライト
 * 検索時間をリアルタイム表示
