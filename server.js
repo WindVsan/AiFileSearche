@@ -73,12 +73,14 @@ async function getAllFilesAsync(dirPath, extensions, searchId, depth = 0, arrayO
 // 利用可能なモデルリストをフロントエンドに渡すAPI
 app.get('/api/config', (req, res) => {
     try {
-        const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+        const rawConfig = fs.readFileSync(configPath, 'utf8').replace(/^\uFEFF/, '');
+        const config = JSON.parse(rawConfig);
         res.json({ 
             models: config.models || ['gemini-3.1-flash-lite-preview'],
             baseDir: BASE_DIR
         });
     } catch (e) {
+        console.error('apis.jsonの読み込みエラー (/api/config):', e);
         res.json({ models: ['gemini-3.1-flash-lite-preview'], baseDir: BASE_DIR });
     }
 });
@@ -212,10 +214,12 @@ app.post('/api/search', async (req, res) => {
 
     let config;
     try {
-        config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+        const rawConfig = fs.readFileSync(configPath, 'utf8').replace(/^\uFEFF/, '');
+        config = JSON.parse(rawConfig);
     } catch (e) {
+        console.error('apis.jsonの読み込みエラー (/api/search):', e);
         delete activeSearches[id];
-        return res.status(500).json({ error: 'apis.jsonの読み込みに失敗しました。' });
+        return res.status(500).json({ error: 'apis.jsonの読み込みに失敗しました。コマンドプロンプトのエラーログを確認してください。' });
     }
 
     if (!config.apiKey) {
@@ -343,6 +347,15 @@ app.listen(PORT, () => {
     console.log(`========================================`);
     console.log(` AI File Searcher サーバー起動完了`);
     console.log(` URL: http://localhost:${PORT}`);
-    console.log(` ログ出力中...`);
+    console.log(` ログ出力中... (このウィンドウを閉じると終了します)`);
     console.log(`========================================`);
+    
+    // サーバー起動後にブラウザを自動で開く
+    const url = `http://localhost:${PORT}`;
+    const command = process.platform === 'win32' ? `start "" "${url}"` : `open "${url}"`;
+    exec(command, (error) => {
+        if (error) {
+            console.error('ブラウザの起動に失敗しました。手動でURLを開いてください。');
+        }
+    });
 });
